@@ -29,10 +29,9 @@ DOCKER_VERS_MIN  := $(shell echo $(DOCKER_VERS) | cut -d. -f2)
 DOCKER_SUPPORTED := $(shell [ $(DOCKER_VERS_MAJ) -eq 1 -a $(DOCKER_VERS_MIN) -ge 9 ] && echo true)
 
 DOCKER_RMI       := $(NV_DOCKER) rmi
-DOCKER_RUN       := $(NV_DOCKER) run --rm --net=host
+DOCKER_RUN       := $(NV_DOCKER) run --rm
 DOCKER_IMAGES    := $(NV_DOCKER) images -q $(PKG_NAME)
-DOCKER_BUILD     := $(NV_DOCKER) build --build-arg USER_ID="$(shell id -u)" \
-                                       --build-arg CR_NAME="$(CR_NAME)" \
+DOCKER_BUILD     := $(NV_DOCKER) build --build-arg CR_NAME="$(CR_NAME)" \
                                        --build-arg CR_EMAIL="$(CR_EMAIL)" \
                                        --build-arg PKG_NAME="$(PKG_NAME)" \
                                        --build-arg PKG_VERS="$(PKG_VERS)" \
